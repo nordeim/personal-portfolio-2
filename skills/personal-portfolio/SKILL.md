@@ -379,7 +379,7 @@ export interface ArchiveRoute {
 
 export interface SocialLink {
   label: string;
-  icon: 'mail' | 'linkedin' | 'instagram' | 'github' | 'wix';
+  icon: 'mail' | 'linkedin' | 'instagram' | 'github';
   href: string;
   description: string;
 }

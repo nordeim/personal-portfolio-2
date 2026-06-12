@@ -6,6 +6,11 @@ Awesome meticulous review, analysis and planning. Please keep up the good work. 
 
 ---
 
+awesome meticulous job so far. please keep up the good work. now, please meticulously review @skills/personal-portfolio/SKILL.md and validate the codebase against it to check for alignment
+validate it against the current codebase systematically. This will be a detailed comparison across all sections, systematically validate the codebase against the skill by checking each section. Start by checking the key areas where the skill describes specific requirements.
+
+---
+
 Now, help me to meticulously research with extensive web searches how best to design and implement the app using the attached draft blueprint.  Then meticulously plan to create a comprehensive `Project Requirements Document` in markdown format. I want to build a production-ready and enterprise-grade website. Meticulously research similar websites to propose a best-of-breed design with implementation details.
 
 ---
