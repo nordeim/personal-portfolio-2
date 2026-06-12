@@ -39,7 +39,7 @@ Follow this workflow for all implementation tasks:
 - **No `any`**: Use `unknown` or specific types.
 - **No `enum` / `namespace`**: `erasableSyntaxOnly: true` is enabled. Use union types instead (e.g., `icon: 'mail' | 'linkedin' | 'github'`).
 - **Indexed Access**: `noUncheckedIndexedAccess: true` — array/object index access returns `T | undefined`. Handle the `undefined` case explicitly.
-- **Patterns**: Use early returns, composition over inheritance, and functional components.
+Au692 - **Patterns**: Use early returns, composition over inheritance, and functional components.
 - **States**: Handle loading, error, empty, and success states explicitly.
 - **Key Props**: Use stable, unique keys in `.map()`. Avoid using array indices or raw strings. See `ContentBody.tsx` for a stable key pattern (`para-${index}`).
 
@@ -49,6 +49,7 @@ Follow this workflow for all implementation tasks:
 - **Grid Unit**: Use the 28px rhythm (`--unit: 28px`).
 - **Brutalism**: `1px solid` borders, `0px` border-radius (`rounded-none`). Global `border-radius: 0px !important` is enforced.
 - **No Rounding**: `rg "rounded-full\|rounded-md\|rounded-lg\|rounded-sm" src/` must return **zero** matches. Any new `rounded-*` class is a regression.
+- **Custom Animations**: If you add a new animation (e.g., `@keyframes` + `.animate-foo`), define BOTH in `src/styles/index.css` and verify in the target component.
 - **Fonts**:
   - Editorial: `Cormorant Garamond` (headlines, kinetic).
   - Utility: `IBM Plex Mono` (metadata, system labels).
@@ -106,6 +107,7 @@ Content is data-driven. Define new entities in `src/lib/types.ts` and populate t
 - **CRITICAL**: Glob paths are relative to `src/lib/content.ts`, so they MUST start with `../content/`. Using `./content/` is a fatal error.
 - **Guide Files**: `PUT_*_HERE.md` files are excluded from production data by `isCollectionGuideFile()`.
 - **Eager Loading**: `eager: true` is correct for this portfolio (~20 files). For >500 items, switch to `{ eager: false }`.
+- **Collections**: `collectionDefinitions[]` (in `data.ts`) must have a `slug` that **exactly** matches the directory name under `src/content/collections/`. Mismatch = empty collection.
 
 ### Accessibility (WCAG AAA)
 
@@ -126,3 +128,4 @@ Content is data-driven. Define new entities in `src/lib/types.ts` and populate t
 - **Over-Engineering**: Do not add libraries (like Framer Motion) for effects achievable with simple CSS/hooks.
 - **Inconsistent Radii**: Do not mix `rounded-none` with other border radius classes. The design system is intentionally brutalist.
 - **External UI Libraries**: No shadcn/ui, Radix, MUI, or component libraries. All components are bespoke.
+- **Orphaned CSS**: Do not add `@keyframes` without a corresponding utility class, or vice versa. Both must exist in `index.css`.

@@ -58,7 +58,7 @@ Key Contextual Highlights
 
 - **Symptom**: React warnings about duplicate keys.
 - **Root Cause**: Using paragraph strings or dynamic content as `key` props.
-- **Fix**: Use stable identifiers like `key={`para-${index}`}`.
+- **Fix**: Use stable identifiers like `key={\`para-\${index}\`}`.
 
 ### Bug 4: Light Theme Override Specificity Failures
 
@@ -75,6 +75,25 @@ Key Contextual Highlights
 - **Symptom**: "Object is possibly 'undefined'" on array index access.
 - **Fix**: Add explicit checks: `if (arr[index])` or use optional chaining `arr[index]?.prop`.
 
+### Bug 7: Collection Slug → Directory Name Mismatch
+
+- **Symptom**: Collection shows "No items in this collection yet" despite files being present in `src/content/collections/`.
+- **Root Cause**: `collectionDefinitions[].slug` does not match the physical directory name under `src/content/collections/`. `getCollectionItems()` filters by `extractFolderName(path) === collectionSlug`.
+- **Fix**: Ensure `slug` in `collectionDefinitions` (data.ts) exactly matches the directory name (case-sensitive).
+- **Directories**: `artworks/`, `design/`, `experiments/`, `photography/`, `poetry/`, `stories/`
+
+### Bug 8: Missing CSS Animation Keyframes
+
+- **Symptom**: Element with a custom animation class (e.g., `animate-fadeIn`) does not animate.
+- **Root Cause**: `@keyframes` definition or `.animate-*` utility class missing from `src/styles/index.css`.
+- **Fix**: Add `@keyframes` and corresponding utility class to `index.css`. Check for typos in animation names.
+- **Known Animations**: `animate-fadeIn` (used in `AboutFlow.tsx`)
+
+### Bug 9: Dead Code in Union Types
+
+- **Symptom**: Unused icon/variant in a union type (e.g., `wix` in `SocialLink.icon`)
+- **Fix**: Remove unused variants from both the union type (`types.ts`) and the consuming Record (`SocialIcon.tsx`).
+
 ## Recommendations
 
 - **Before making changes**: Run `pnpm typecheck`. It is fast and catches most issues.
@@ -82,8 +101,10 @@ Key Contextual Highlights
 - **When touching images**: Ensure `alt` text is meaningful. `alt=""` is only for decorative images (GrainOverlay, BrandMark).
 - **When mapping arrays**: Verify `key` props are stable and unique.
 - **When writing CSS**: No `tailwind.config.js` exists. All tokens go in `src/styles/index.css` under `@theme`.
+- **When adding collections**: Add the `Collection` definition to `src/lib/data.ts` AND create the matching directory under `src/content/collections/`.
 
 Refer to [CLAUDE.md](./CLAUDE.md) for the "Meticulous Approach" workflow requirements.
+
 
 ┌───────────────────┬──────────────────────────────────────────────────────┬─────────────────┬────────────────────────────────────────────────────┐
 │ Category          │ Claimed in CLAUDE.md                                 │ Codebase Status │ Evidence                                           │
@@ -139,3 +160,4 @@ Key Updates Applied:
  * Routing Consistency: Updated hash URL examples to use the #collection/<slug> format used by the useRouteHash hook and App.tsx.
  * Technical Rigor: Updated the build verification steps to include pnpm typecheck as the primary quality gate.
  * Troubleshooting: Clarified the "NY" placeholder fallback and pathing rules (e.g., src/content/ vs public/).
+

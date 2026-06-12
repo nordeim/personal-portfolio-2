@@ -24,7 +24,7 @@ An avant-garde **Digital Installation** that balances **Tactile Brutalism** (vis
 | 🏗️ **Asymmetric Bento** | Non-linear portfolio grid with category-specific typographic textures (Mono for Code, Serif for Poetry) |
 | 🔧 **Machine Mode (MX)** | Terminal-style overlay revealing build info, raw JSON state, route data, and collection counts |
 | 🎨 **Dual Theme** | Night/Day toggle with OKLCH-based color system for perceptual uniformity across both themes |
-| 📜 **Editorial Archive** | Hash-routed collection spreads with magazine-style layouts for poetry, photography, and experiments |
+| 📜 **Editorial Archive** | Hash-routed collection spreads with magazine-style layouts for all creative disciplines |
 | 🌾 **Grain Overlay** | CSS noise texture layer at `z-[9999]` adding tactile, analog "human fingerprint" to the digital canvas |
 | ♿ **WCAG AAA** | High-contrast brutalism with `prefers-reduced-motion` support, skip link, meaningful `alt` text, focus-visible |
 
@@ -57,7 +57,7 @@ An avant-garde **Digital Installation** that balances **Tactile Brutalism** (vis
 ├── 📄 main.tsx                # React 19 StrictMode entry
 ├── 📂 components/
 │   ├── 📄 HeroKinetic.tsx     # Viewport-scaled hero + pointer parallax + kinetic typography
-│   ├── 📄 AboutFlow.tsx       # Asymmetric editorial with stable-height sizer pattern
+│   ├── 📄 AboutFlow.tsx       # Asymmetric editorial with stable-height sizer + animate-fadeIn
 │   ├── 📄 BentoGrid.tsx       # 12-column asymmetric portfolio grid
 │   ├── 📄 BentoTile.tsx       # Category-textured project tile
 │   ├── 📄 ArchiveSpread.tsx   # Dual-view collection display (grid + detail)
@@ -68,7 +68,7 @@ An avant-garde **Digital Installation** that balances **Tactile Brutalism** (vis
 │   ├── 📄 ContactSection.tsx  # Contact + social links + footer
 │   ├── 📄 GrainOverlay.tsx    # Fixed CSS noise overlay (z-9999)
 │   ├── 📄 BrandMark.tsx       # SVG brand mark
-│   ├── 📄 SocialIcon.tsx      # Inline SVG social icons
+│   ├── 📄 SocialIcon.tsx      # Inline SVG social icons (mail, linkedin, instagram, github)
 │   └── 📄 ThemeToggle.tsx     # Day/night toggle button
 ├── 📂 hooks/
 │   ├── 📄 useWeightedScroll.ts # Scroll velocity → font-weight mapping (rAF-throttled)
@@ -79,9 +79,26 @@ An avant-garde **Digital Installation** that balances **Tactile Brutalism** (vis
 │   ├── 📄 content.ts          # import.meta.glob ingestion + frontmatter parsing
 │   └── 📄 data.ts             # Static data (heroSlides, pillars, projects, collections)
 ├── 📂 styles/
-│   └── 📄 index.css           # Tailwind @theme tokens + grid + typography + grain + themes
+│   └── 📄 index.css           # Tailwind @theme tokens + grid + typography + grain + themes + animations
 └── 📂 content/                # File-system content (portrait, portfolio, collections)
 ```
+
+## Content Architecture
+
+### Collection Definitions
+
+Collections in `src/lib/data.ts` **must** have a `slug` that exactly matches the directory name under `src/content/collections/`.
+
+| Slug | Directory | Title | Accent | Status |
+|------|-----------|-------|--------|--------|
+| `artworks` | `artworks/` | Visual Studies | `#00a77f` | ✅ Active |
+| `design` | `design/` | Design Archive | `#ff5c35` | ✅ Active |
+| `experiments` | `experiments/` | Lab Experiments | `#16a3b8` | ✅ Active |
+| `photography` | `photography/` | Captured Light | `#f2b705` | ✅ Active |
+| `poetry` | `poetry/` | Verse & Prose | `#8f55ff` | ✅ Active |
+| `stories` | `stories/` | Narrative Works | `#e5488b` | ✅ Active |
+
+> ⚠️ **Critical**: `collectionDefinitions[].slug` must **exactly** match the physical directory name (case-sensitive). `getCollectionItems()` uses `extractFolderName(path) === collectionSlug` to filter files. A mismatch results in an empty collection display.
 
 ## Quick Start
 
@@ -164,6 +181,8 @@ pnpm build
 | Mobile menu locks scrolling | `useEffect` cleanup missing | Ensure `document.body.style.overflow` resets in cleanup function |
 | Build fails on GitHub Pages | Incorrect base path | Verify `base: './'` in `vite.config.ts` |
 | `erasableSyntaxOnly` error | Using `enum` or `namespace` | Replace with union types: `type Icon = 'mail' \| 'linkedin'` |
+| Collection shows "No items" | Slug ↔ directory name mismatch | Ensure `collectionDefinitions[].slug` exactly matches directory under `src/content/collections/` |
+| `animate-fadeIn` not working | Missing `@keyframes` definition | Add `@keyframes fadeIn` + `.animate-fadeIn` utility to `src/styles/index.css` |
 
 ## Contributing
 
@@ -174,6 +193,8 @@ This project follows the **Meticulous Approach** for all changes. See [CLAUDE.md
 3. Reject generic components; use the project's established design system
 4. All animations must check `useReducedMotion()`
 5. No external UI libraries — all components are bespoke
+6. When adding a collection: add `Collection` definition to `data.ts` **AND** create matching directory under `src/content/collections/`
+7. When adding a CSS animation: define both `@keyframes` **AND** `.animate-*` utility class in `index.css`
 
 ## License
 

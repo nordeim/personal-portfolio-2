@@ -2,6 +2,10 @@ Please meticulously plan to review @AGENTS.md , @CLAUDE.md and @GEMINI.md to hav
 
 ---
 
+Awesome meticulous review, analysis and planning. Please keep up the good work. now, please meticulously review and update @README.md , @CLAUDE.md and @AGENTS.md to align with the latest code changes, issues fixed, gotchas to look out for, troubleshooting tips, lessons learnt, outstanding issues and recommendations.
+
+---
+
 Now, help me to meticulously research with extensive web searches how best to design and implement the app using the attached draft blueprint.  Then meticulously plan to create a comprehensive `Project Requirements Document` in markdown format. I want to build a production-ready and enterprise-grade website. Meticulously research similar websites to propose a best-of-breed design with implementation details.
 
 ---
