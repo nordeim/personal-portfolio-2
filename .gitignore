@@ -1,0 +1,17 @@
+node_modules/
+.next/
+venv/
+.venv/
+.venv
+vendor/
+bak.git/
+plan/
+backup/
+dist/
+nohup.out
+.windsurfrules
+upload/
+.agent
+.gemini
+.claude
+.agents
