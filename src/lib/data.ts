@@ -164,6 +164,30 @@ export const collectionDefinitions: Collection[] = [
     description: 'Technical experiments and creative explorations.',
     status: 'active',
   },
+  {
+    slug: 'artworks',
+    title: 'Visual Studies',
+    category: 'art',
+    accent: '#00a77f',
+    description: 'Artistic explorations and visual compositions.',
+    status: 'active',
+  },
+  {
+    slug: 'design',
+    title: 'Design Archive',
+    category: 'design',
+    accent: '#ff5c35',
+    description: 'Brand systems, interfaces, and design experiments.',
+    status: 'active',
+  },
+  {
+    slug: 'stories',
+    title: 'Narrative Works',
+    category: 'story',
+    accent: '#e5488b',
+    description: 'Long-form essays and narrative experiments.',
+    status: 'active',
+  },
 ];
 
 // ==========================================

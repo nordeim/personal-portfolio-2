@@ -1,3 +1,7 @@
+Please meticulously plan to review @AGENTS.md , @CLAUDE.md and @GEMINI.md to have a deep understanding of the WHAT, WHY and HOW of the project and its codebase design and architecture, then meticulously validate your deep understanding against codebase to check for alignment.
+
+---
+
 Now, help me to meticulously research with extensive web searches how best to design and implement the app using the attached draft blueprint.  Then meticulously plan to create a comprehensive `Project Requirements Document` in markdown format. I want to build a production-ready and enterprise-grade website. Meticulously research similar websites to propose a best-of-breed design with implementation details.
 
 ---
